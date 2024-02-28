@@ -30,9 +30,12 @@ class CharList extends Component {
 	render() {
 		const { charList } = this.state;
 
-		const modifiedList = charList.map((char, id) => {
+		const modifiedList = charList.map(char => {
 			return (
-				<li key={id} className="char__item">
+				<li 
+					key={char.id}
+					onClick={() => this.props.onCharSelected(char.id)}
+					className="char__item">
 					<img src={char.thumbnail} alt={char.name} />
 					<div className="char__name">{char.name}</div>
 				</li>
