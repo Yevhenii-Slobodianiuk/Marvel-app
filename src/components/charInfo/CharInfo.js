@@ -21,7 +21,7 @@ class CharInfo extends Component {
 		this.updateChar();
 	}
 
-	componentDidUpdate(prevProps, prevState) {
+	componentDidUpdate(prevProps) {
 		if (this.props.charId !== prevProps.charId) {
 			this.updateChar();
 		}
@@ -80,6 +80,21 @@ class CharInfo extends Component {
 
 const View = ({ char }) => {
 	const { name, description, thumbnail, homepage, wiki, comics } = char;
+
+	let comicsResult = null;
+
+	if (comics.length > 0) {
+		comicsResult = comics.map((item, i) => {
+			return (
+				<li key={i} className="char__comics-item">
+					{item.name}
+				</li>
+			)
+		}).slice(0, 10)
+	} else {
+		comicsResult = "There is no comics for this character :("
+	}
+
 	return (
 		<>
 			<div className="char__basics">
@@ -101,15 +116,7 @@ const View = ({ char }) => {
 			</div>
 			<div className="char__comics">Comics:</div>
 			<ul className="char__comics-list">
-				{
-					comics.map((item, i) => {
-						return (
-							<li key={i} className="char__comics-item">
-								{item.name}
-							</li>
-						)
-					})
-				}
+				{comicsResult}
 			</ul>
 		</>
 	)
