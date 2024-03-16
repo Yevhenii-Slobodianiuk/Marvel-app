@@ -47,7 +47,7 @@ const ComicsList = () => {
 
 			return (
 				<li key={i} className="comics__item">
-					<Link to={`/${item.id}`}>
+					<Link to={`/comics/${item.id}`}>
 						<img src={item.thumbnail} alt={item.title} style={imgStyle} className="comics__item-img" />
 						<div className="comics__item-name">{item.title}</div>
 						<div className="comics__item-price">{item.price ? `${item.price}$` : "Not AVALIABLE"}</div>
