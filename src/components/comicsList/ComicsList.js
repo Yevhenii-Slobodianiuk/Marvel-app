@@ -37,7 +37,6 @@ const ComicsList = () => {
 	}
 
 	const renderComics = (arr) => {
-		console.log(arr);
 		let items = arr.map(item => {
 
 			let imgStyle = { 'objectFit': 'cover' };
@@ -47,7 +46,7 @@ const ComicsList = () => {
 
 			return (
 				<li key={item.id} className="comics__item">
-					<a target="_blank" href={item.url}>
+					<a href={item.url}>
 						<img src={item.thumbnail} alt={item.title} style={imgStyle} className="comics__item-img" />
 						<div className="comics__item-name">{item.title}</div>
 						<div className="comics__item-price">{item.price ? `${item.price}$` : "Not AVALIABLE"}</div>
