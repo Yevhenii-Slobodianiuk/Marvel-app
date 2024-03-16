@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import CheckPropTypes from 'prop-types';
 
 import useMarvelService from '../../services/MarvelServices';
@@ -9,10 +10,9 @@ import Skeleton from "../skeleton/Skeleton"
 import './charInfo.scss';
 
 const CharInfo = (props) => {
-
 	const [char, setChar] = useState(null);
 
-	const {loading, error, getCharacter, clearError} = useMarvelService();
+	const { loading, error, getCharacter, clearError } = useMarvelService();
 
 	useEffect(() => {
 		updateChar()
@@ -53,14 +53,17 @@ const CharInfo = (props) => {
 
 const View = ({ char }) => {
 	const { name, description, thumbnail, homepage, wiki, comics } = char;
-
+	
 	let comicsResult = null;
 
 	if (comics.length > 0) {
 		comicsResult = comics.map((item, i) => {
+			let comicId = item.resourceURI.split("").slice(43).join("");
 			return (
 				<li key={i} className="char__comics-item">
-					{item.name}
+					<Link to={`/comics/${comicId}`}>
+						{item.name}
+					</Link>
 				</li>
 			)
 		}).slice(0, 10)
