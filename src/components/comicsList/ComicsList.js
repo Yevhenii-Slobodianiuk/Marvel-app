@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import useMarvelService from "../../services/MarvelServices";
 import ErrorMessage from "../errorMessage/ErrorMessage";
@@ -37,7 +38,7 @@ const ComicsList = () => {
 	}
 
 	const renderComics = (arr) => {
-		let items = arr.map(item => {
+		let items = arr.map((item, i) => {
 
 			let imgStyle = { 'objectFit': 'cover' };
 			if (item.thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
@@ -45,12 +46,12 @@ const ComicsList = () => {
 			}
 
 			return (
-				<li key={item.id} className="comics__item">
-					<a href={item.url}>
+				<li key={i} className="comics__item">
+					<Link to={`/${item.id}`}>
 						<img src={item.thumbnail} alt={item.title} style={imgStyle} className="comics__item-img" />
 						<div className="comics__item-name">{item.title}</div>
 						<div className="comics__item-price">{item.price ? `${item.price}$` : "Not AVALIABLE"}</div>
-					</a>
+					</Link>
 				</li>
 			)
 		})
