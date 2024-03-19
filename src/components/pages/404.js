@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import ErrorMessage from "../errorMessage/ErrorMessage";
 
-export const Page404 = () => {
+const Page404 = () => {
 	return (
 		<div style={{ display: "flex", alignItems: "center", flexDirection: "column", gap: "30px" }}>
 			<h1>Page doesn`t exist</h1>
@@ -14,3 +14,5 @@ export const Page404 = () => {
 		</div>
 	)
 }
+
+export default Page404;

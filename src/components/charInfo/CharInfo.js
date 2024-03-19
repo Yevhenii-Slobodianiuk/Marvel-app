@@ -53,18 +53,18 @@ const CharInfo = (props) => {
 
 const View = ({ char }) => {
 	const { name, description, thumbnail, homepage, wiki, comics } = char;
-	
+
 	let comicsResult = null;
 
 	if (comics.length > 0) {
 		comicsResult = comics.map((item, i) => {
 			let comicId = item.resourceURI.split("").slice(43).join("");
 			return (
-				<li key={i} className="char__comics-item">
-					<Link to={`/comics/${comicId}`}>
+				<Link className="char__comics-item" to={`/comics/${comicId}`}>
+					<li key={i}>
 						{item.name}
-					</Link>
-				</li>
+					</li>
+				</Link>
 			)
 		}).slice(0, 10)
 	} else {
