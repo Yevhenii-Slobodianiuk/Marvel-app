@@ -1,4 +1,5 @@
 import { Formik, Field, Form, ErrorMessage } from "formik"
+import * as Yup from "yup"
 
 import './charSearchForm.scss';
 
@@ -10,6 +11,9 @@ const CharSearchForm = () => {
 				initialValues={{
 					charName: "",
 				}}
+				validationSchema={Yup.object({
+					charName: Yup.string().required("This field is required!")
+				})}
 				onSubmit={values => console.log(JSON.stringify(values, null, 2))}
 			>
 				<Form>
