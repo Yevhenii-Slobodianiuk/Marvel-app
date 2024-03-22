@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import useMarvelService from '../../services/MarvelServices';
 import Spinner from '../spinner/Spinner';
@@ -27,7 +27,7 @@ const CharacterPage = ({Component}) => {
 			.then(onCharLoaded)
 	}
 
-	const content = !(loading || error || !char) ? <Component char={char} /> : null;
+	const content = !(loading || error || !char) ? <Component data={char} /> : null;
 	const errorMessage = error ? <ErrorMessage /> : null;
 	const spinner = loading ? <Spinner /> : null;
 
