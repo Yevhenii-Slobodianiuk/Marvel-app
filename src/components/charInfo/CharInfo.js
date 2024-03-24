@@ -12,7 +12,7 @@ import './charInfo.scss';
 const CharInfo = (props) => {
 	const [char, setChar] = useState(null);
 
-	const { loading, error, getCharacter, clearError } = useMarvelService();
+	const { getCharacter, clearError, process, setProcess } = useMarvelService();
 
 	useEffect(() => {
 		updateChar()
@@ -34,19 +34,31 @@ const CharInfo = (props) => {
 		clearError();
 		getCharacter(charId)
 			.then(onCharLoaded)
+			.then(() => setProcess("confirmed"))
 	}
 
-	const skeleton = char || loading || error ? null : <Skeleton />
-	const content = !(loading || error || !char) ? <View char={char} /> : null;
-	const errorMessage = error ? <ErrorMessage /> : null;
-	const spinner = loading ? <Spinner /> : null;
+	const setContent = (process, char) => {
+		switch (process) {
+			case "waiting":
+				return <Skeleton />;
+				break;
+			case "loading":
+				return <Spinner />;
+				break;
+			case "confirmed":
+				return <View char={char} />;
+				break;
+			case "error":
+				return <ErrorMessage />;
+				break;
+			default:
+				throw new Error("Unexpected process state");
+		}
+	}
 
 	return (
 		<div className="char__info">
-			{skeleton}
-			{content}
-			{errorMessage}
-			{spinner}
+			{setContent(process, char)}
 		</div>
 	)
 }
@@ -60,8 +72,8 @@ const View = ({ char }) => {
 		comicsResult = comics.map((item, i) => {
 			let comicId = item.resourceURI.split("").slice(43).join("");
 			return (
-				<Link className="char__comics-item" to={`/comics/${comicId}`}>
-					<li key={i}>
+				<Link key={i} className="char__comics-item" to={`/comics/${comicId}`}>
+					<li>
 						{item.name}
 					</li>
 				</Link>
