@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import CheckPropTypes from 'prop-types';
 
 import useMarvelService from '../../services/MarvelServices';
-import setContent from '../utils/setContent';
+import setSingleContent from '../utils/setSingleContent';
 
 import './charInfo.scss';
 
@@ -37,7 +37,7 @@ const CharInfo = (props) => {
 
 	return (
 		<div className="char__info">
-			{setContent(process, char, View)}
+			{setSingleContent(process, View, char)}
 		</div>
 	)
 }
